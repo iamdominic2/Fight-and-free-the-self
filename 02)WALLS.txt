@@ -1,3 +1,5 @@
+//Nothing more than the walls themselves.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
