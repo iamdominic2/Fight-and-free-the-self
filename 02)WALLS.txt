@@ -1,4 +1,4 @@
-//Nothing more than the walls themselves.
+//Nothing more than the walls themselves. It isn't even dispalyed - A seperate version that is translucent and has less unnecessary edges is displayed.
 
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
