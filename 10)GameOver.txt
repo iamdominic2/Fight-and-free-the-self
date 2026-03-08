@@ -1,3 +1,5 @@
+//Nothing more than the Game Over screen itself. When the project stops, it naturally appears.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
