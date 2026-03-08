@@ -1,0 +1,66 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(-185, -35);
+    Looks.Show();
+    Looks.SetEffectTo(GHOST, 50);
+    Control.CreateCloneOf(_myself_);
+    Looks.SetEffectTo(BRIGHTNESS, -50);
+}
+
+
+//----- Key pressed events --------------------------------------------------------------------------------------------
+
+WhenKeyPressed(any)
+{
+    Looks.Hide();
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Costume.GoToFrontBack(front);
+    Looks.SetSizeTo(50);
+    Forever
+    {
+        Motion.GoTo(14)j1);
+        If (Sensing.DistanceTo(_mouse_) < 52)
+        {
+            Repeat Until (Not (Sensing.MouseDown()))
+            {
+                Motion.GoTo(14)j1);
+                Motion.PointTowards(_mouse_);
+                Motion.Move((Sensing.DistanceTo(_mouse_) - ((Sensing.DistanceTo(_mouse_) - 36) * (Sensing.DistanceTo(_mouse_) > 36))));
+                If (Motion.YPosition() > -15)
+                {
+                    List.Add(mobileinputs, "up");
+                }
+                If (Motion.YPosition() < -55)
+                {
+                    List.Add(mobileinputs, "down");
+                }
+                If (Motion.XPosition() > -165)
+                {
+                    List.Add(mobileinputs, "right");
+                }
+                If (Motion.XPosition() < -205)
+                {
+                    List.Add(mobileinputs, "left");
+                }
+            }
+        }
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

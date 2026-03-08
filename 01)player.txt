@@ -1,0 +1,192 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(-29, 0);
+    Motion.PointInDirection(80);
+    Looks.Show();
+    Forever
+    {
+        Call Playertick;
+        Call Int Raycaster;
+        Event.Broadcast("Raycast");
+        Event.Broadcast("Ent Tick");
+        Event.Broadcast("Paint");
+        Event.Broadcast("Gui");
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        Looks.SetEffectTo(GHOST, G);
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        If (Sensing.KeyPressed(m) Or List.ContainsItem(mobileinputs, "map"))
+        {
+            Repeat Until (Not (Sensing.KeyPressed(m)))
+            {
+                Event.Broadcast("map");
+                Looks.SetEffectTo(GHOST, 50);
+                Repeat (1)
+                {
+                    Looks.SetEffectTo(GHOST, 0);
+                }
+                Looks.SetEffectTo(GHOST, 0);
+                List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "map"));
+                Repeat (0)
+                {
+                    Control.Wait(0);
+                }
+            }
+            Repeat Until Sensing.KeyPressed(m)
+            {
+                Event.Broadcast("map");
+                Looks.SetEffectTo(GHOST, 50);
+                Repeat (1)
+                {
+                    Looks.SetEffectTo(GHOST, 0);
+                }
+                Looks.SetEffectTo(GHOST, 0);
+                List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "map"));
+                Repeat (0)
+                {
+                    Control.Wait(0);
+                }
+            }
+            Wait Until (Not (Sensing.KeyPressed(m)));
+        }
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Int Raycaster (warp=false)
+{
+    CAM DIR = Motion.Direction();
+    DV = (240 / tan((FOV / 2)));
+    List.DeleteAll(Draw Dist);
+    List.DeleteAll(Draw X);
+    List.DeleteAll(Draw Type);
+    List.Add(Draw Dist, 999999999);
+    List.Add(Draw Type, "");
+    List.Add(Draw X, "");
+    DRAW INDEX = 2;
+}
+
+Define Move(string number or text) (warp=false)
+{
+    Motion.ChangeXBy((sin(Motion.Direction()) * number or text));
+    If Sensing.TouchingObject(02)WALLS)
+    {
+        Motion.ChangeXBy((0 - (sin(Motion.Direction()) * number or text)));
+    }
+    Motion.ChangeYBy((cos(Motion.Direction()) * number or text));
+    If Sensing.TouchingObject(02)WALLS)
+    {
+        Motion.ChangeYBy((0 - (cos(Motion.Direction()) * number or text)));
+    }
+}
+
+Define Playertick (warp=false)
+{
+    Looks.SetSizeTo(150);
+    Looks.SwitchCostumeTo(costume1);
+    Motion.SetRotationStyle(don't rotate);
+    If (Sensing.KeyPressed(left arrow) Or List.ContainsItem(mobileinputs, "left"))
+    {
+        Motion.TurnLeft(4);
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "left"));
+    }
+    If (Sensing.KeyPressed(right arrow) Or List.ContainsItem(mobileinputs, "right"))
+    {
+        Motion.TurnRight(4);
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "right"));
+    }
+    If (Sensing.KeyPressed(a) Or List.ContainsItem(mobileinputs, "sleft"))
+    {
+        Motion.TurnLeft(90);
+        Call Move((0.8 * Delta));
+        Motion.TurnRight(90);
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "sleft"));
+    }
+    If (Sensing.KeyPressed(d) Or List.ContainsItem(mobileinputs, "sright"))
+    {
+        Motion.TurnRight(90);
+        Call Move((0.8 * Delta));
+        Motion.TurnLeft(90);
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "sright"));
+    }
+    If ((Sensing.KeyPressed(up arrow) Or Sensing.KeyPressed(w)) Or List.ContainsItem(mobileinputs, "up"))
+    {
+        Call Move(Delta);
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "up"));
+    }
+    If ((Sensing.KeyPressed(down arrow) Or Sensing.KeyPressed(s)) Or List.ContainsItem(mobileinputs, "down"))
+    {
+        Call Move((-0.75 * Delta));
+        List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "down"));
+    }
+    If Sensing.TouchingObject(03)nextwarpzone)
+    {
+        Looks.Hide();
+        Sound.Play(Teleport2);
+        Sensing.ResetTimer();
+        Repeat Until (Sensing.Timer() > 1)
+        {
+            Event.Broadcast("Raycast");
+            Event.Broadcast("Paint");
+            Event.Broadcast("Gui");
+        }
+        Looks.Show();
+        scene += 1;
+        Event.Broadcast("next");
+        Motion.GoToXY((-30 - scene), (scene + 100));
+        Motion.PointInDirection(167);
+        If (scene > 3)
+        {
+            Motion.PointInDirection(119);
+        }
+        Sound.StopAllSounds();
+    }
+    Looks.SwitchCostumeTo(costume3);
+    Motion.SetRotationStyle(all around);
+}
+
+Define Win (warp=true)
+{
+    Repeat Until Sensing.TouchingObject(03)nextwarpzone)
+    {
+        Motion.GoTo(_random_);
+    }
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Potions = 25;
+Level = 19;
+Exp pts = 222222;
+scene = 8;
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+costume3.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Attack.wav
+Enemy Hurt.wav
+Hurt2.wav
+Teleport2.wav

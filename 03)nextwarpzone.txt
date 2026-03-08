@@ -1,0 +1,53 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    G = 100;
+    Forever
+    {
+        Looks.SwitchCostumeTo(scene);
+        Looks.SetEffectTo(GHOST, 100);
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(map)
+{
+    Looks.SetEffectTo(GHOST, 50);
+    Repeat (5)
+    {
+        Looks.SetEffectTo(GHOST, 50);
+    }
+}
+
+WhenBroadcastReceived(next)
+{
+    Looks.NextCostume();
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+scene = 8;
+
+Exp pts = 100000;
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

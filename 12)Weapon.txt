@@ -1,0 +1,83 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+c = 6
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Call Clone;
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.Show();
+    Forever
+    {
+        Looks.SwitchCostumeTo(c);
+        Looks.SetEffectTo(BRIGHTNESS, -100);
+        Looks.SetEffectTo(GHOST, 55);
+        If (Not ((c > Weapon Limit)))
+        {
+            Looks.ClearGraphicEffects();
+            If (Not ((c == Weapon No)))
+            {
+                Looks.SetEffectTo(BRIGHTNESS, -50);
+                Looks.SetEffectTo(GHOST, 35);
+            }
+            If Sensing.KeyPressed(c)
+            {
+                Weapon No = c;
+            }
+            If Sensing.TouchingObject(_mouse_)
+            {
+                hover = c;
+                If Sensing.MouseDown()
+                {
+                    Weapon No = c;
+                }
+            }
+        }
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Clone (warp=true)
+{
+    Weapon No = 1;
+    c = 0;
+    Motion.GoToXY(-225, -110);
+    Repeat (6)
+    {
+        c += 1;
+        Control.CreateCloneOf(_myself_);
+        Motion.ChangeXBy(25);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+costume3.svg
+costume4.svg
+costume5.svg
+costume6.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+arrow.wav
+BTL-MON-HIT05.mp3.wav
+BTL-MON-SWORD02.mp3.wav
+EnemyShoot.wav
+spear.wav
+sword.wav

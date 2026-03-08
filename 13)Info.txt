@@ -1,0 +1,25 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        Motion.GoTo(_mouse_);
+        Motion.ChangeYBy(45);
+        Motion.ChangeXBy(60);
+        Looks.SwitchCostumeTo(hover);
+        hover = 0;
+        Looks.SetEffectTo(BRIGHTNESS, 30);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+costume3.svg
+costume4.svg
+costume5.svg
+costume6.svg
+costume7.svg

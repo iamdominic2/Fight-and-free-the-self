@@ -1,0 +1,121 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+counter1 = 4
+dist = 5.3824333942099
+height = 637.67632503741
+nwz = 0
+row# = 124
+type = 19
+x = 1158.4536374687
+
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Paint)
+{
+    Looks.Hide();
+    Call Draw;
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Draw (warp=true)
+{
+    Pen.Clear();
+    Pen.SetPenSizeTo(1);
+    Pen.SetPenColorToColor(levelcolours[scene]);
+    row# = 0;
+    Repeat (List.Length(Draw Dist))
+    {
+        row# += 1;
+        Call Draw Row;
+    }
+}
+
+Define Draw Row (warp=true)
+{
+    type = Draw Type[row#];
+    x = Draw X[row#];
+    dist = Draw Dist[row#];
+    height = ((DV / dist) * 12);
+    If (type < 20)
+    {
+        Looks.SwitchCostumeTo( );
+        Looks.SetSizeTo((height / 1.5));
+        Looks.SwitchCostumeTo(z);
+        Motion.GoToXY(x, 0);
+        Looks.SwitchCostumeTo(type);
+        Looks.SetEffectTo(BRIGHTNESS, (30 - (dist / 1.1)));
+        If (floor((Motion.XPosition() - x)) == 0)
+        {
+            Pen.Stamp();
+        }
+        Looks.SwitchCostumeTo( );
+        Stop(this script);
+    }
+    counter1 = 0;
+    Pen.SetPenColorToColor(type);
+    Pen.ChangePenBy(brightness, (4 - (dist / 2)));
+    If (type == 11416027)
+    {
+        Pen.ChangePenBy(brightness, Operator.Random(-20 , 20));
+    }
+    Repeat (RES)
+    {
+        Repeat ((1 + Operator.Random(0 , nwz)))
+        {
+            Motion.GoToXY((x + counter1), (height * 2));
+            Motion.Move(0);
+            Pen.Down();
+            Motion.GoToXY((x + counter1), 0);
+            If (type == 11416027)
+            {
+                Pen.ChangePenBy(brightness, Operator.Random(-20 , 20));
+            }
+            Motion.GoToXY((x + counter1), (-1 * height));
+            Pen.Clear();
+        }
+        counter1 += 1;
+    }
+    Looks.SwitchCostumeTo(z);
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Looks.SetEffectTo(COLOR, 0);
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+.svg
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+10.svg
+11.svg
+12.svg
+13.svg
+14.svg
+15.svg
+16.svg
+17.svg
+18.svg
+Potion-a.svg
+z.svg
+z2.svg
+z3.svg
+z5.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

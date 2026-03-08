@@ -1,0 +1,115 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+counter1 = 0
+counter2 = 2542041816
+dist = 26.37948158136
+height = 130.11060645724
+nwz = 0
+x = 240
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SwitchCostumeTo(costume2);
+    Looks.SetSizeTo(0);
+    Looks.SwitchCostumeTo(costume1);
+    FOV = 80;
+    RES = 4;
+    Delta = 0;
+    Time = 0;
+    Forever
+    {
+        Delta = ((Sensing.Timer() - Time) * 30);
+        If (Delta > 2)
+        {
+            Delta = 2;
+        }
+        Time = Sensing.Timer();
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Raycast)
+{
+    Call Raycast;
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Draw(string type) x(string x) dist(string dist) (warp=true)
+{
+    Repeat Until (Draw Dist[(DRAW INDEX - 1)] > dist)
+    {
+        DRAW INDEX += -1;
+    }
+    Repeat Until (Draw Dist[DRAW INDEX] < dist)
+    {
+        DRAW INDEX += 1;
+    }
+    List.InsertItem(Draw Type, DRAW INDEX, type);
+    List.InsertItem(Draw X, DRAW INDEX, x);
+    List.InsertItem(Draw Dist, DRAW INDEX, dist);
+}
+
+Define Raycast (warp=true)
+{
+    Looks.SwitchCostumeTo(costume2);
+    Looks.SetSizeTo(0);
+    Looks.SwitchCostumeTo(costume1);
+    Pen.Clear();
+    scanlines = (480 / RES);
+    x = -240;
+    Repeat (scanlines)
+    {
+        Motion.PointInDirection((CAM DIR + atan((x / DV))));
+        Motion.GoTo(01)player);
+        Call Single Ray;
+        x += RES;
+    }
+}
+
+Define Single Ray (warp=true)
+{
+    Pen.Clear();
+    Repeat Until (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(03)nextwarpzone))
+    {
+        Motion.Move(2);
+        counter2 += 1;
+    }
+    Repeat Until ((Not (Sensing.TouchingObject(02)WALLS))) Or Sensing.TouchingObject(03)nextwarpzone))
+    {
+        Motion.Move(-0.1);
+        counter2 += 1;
+    }
+    dist = (Sensing.DistanceTo(01)player) * cos((CAM DIR - Motion.Direction())));
+    height = ((DV / dist) * 12);
+    counter1 = 0;
+    If Sensing.TouchingObject(03)nextwarpzone)
+    {
+        height += Operator.Random(0 , 3);
+        Call Draw(11416027) x(x) dist(dist);
+    }
+    Else
+    {
+        nwz = 0;
+        Call Draw(levelcolours[scene]) x(x) dist(dist);
+        Pen.ChangePenBy(brightness, (30 - (dist / 2)));
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+levelup.wav

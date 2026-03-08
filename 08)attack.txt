@@ -1,0 +1,71 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        Motion.GoTo(01)player);
+        Motion.PointInDirection(CAM DIR);
+        Attacking = 0;
+        Looks.SwitchCostumeTo(Weapon No);
+        Looks.SetEffectTo(GHOST, 100);
+        If ((Sensing.KeyPressed(space) Or List.ContainsItem(mobileinputs, "atk")) And (SpaceDown == 0))
+        {
+            SpaceDown = 1;
+            If ((Not (Sensing.TouchingObject(02)WALLS))) Or ((Costume.GetNumberName(number) == 3) Or (Costume.GetNumberName(number) == 5)))
+            {
+                Attacking = 1;
+            }
+            Sound.SetVolumeTo(55);
+            If Sensing.TouchingObject(06)Entities)
+            {
+                Sound.SetVolumeTo(100);
+            }
+            Sound.Play(Weapon No);
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            Looks.Hide();
+            Repeat (Weapon Cooldown[Weapon No])
+;
+            Attacking = 0;
+            Looks.Show();
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+            List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
+        }
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    SpaceDown = 1;
+    Forever
+    {
+        If (Not (Sensing.KeyPressed(space)))
+        {
+            SpaceDown = 0;
+        }
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+arrow.wav
+BTL-MON-HIT05.mp3.wav
+BTL-MON-SWORD02.mp3.wav
+EnemyShoot.wav
+spear.wav
+sword.wav

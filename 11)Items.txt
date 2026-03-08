@@ -1,0 +1,209 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+aclone = 0
+enemyhealth = -1.5190633016718
+type = 0
+vx = 0
+vy = 0
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.SetRotationStyle(don't rotate);
+    Looks.SetSizeTo(150);
+    Motion.GoToXY(6, -5);
+}
+
+WhenGreenFlagClicked()
+{
+    aclone = 0;
+    Control.Wait(0.2);
+    Call Spawn(2) of(19);
+}
+
+WhenGreenFlagClicked()
+{
+    Potions = 1;
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Ent Tick)
+{
+    If (aclone == 1)
+    {
+        vx = (Motion.XPosition() - Sensing.Of(x position, 01)player));
+        vy = (Motion.YPosition() - Sensing.Of(y position, 01)player));
+        If (Sensing.DistanceTo(01)player) < 100)
+        {
+            Call Rotate View(vx)(vy)(1)(0);
+        }
+    }
+}
+
+WhenBroadcastReceived(Ent Tick)
+{
+    If (aclone == 1)
+    {
+        vx = (Motion.XPosition() - Sensing.Of(x position, 01)player));
+        vy = (Motion.YPosition() - Sensing.Of(y position, 01)player));
+        If (Sensing.DistanceTo(01)player) < 100)
+        {
+            Call Rotate View(vx)(vy)(1)(0);
+        }
+    }
+}
+
+WhenBroadcastReceived(map)
+{
+    Looks.SetEffectTo(GHOST, 50);
+    Repeat (3)
+    {
+        Looks.SetEffectTo(GHOST, 50);
+    }
+    Looks.SetEffectTo(GHOST, 100);
+}
+
+WhenBroadcastReceived(next)
+{
+    Stop(other scripts in sprite);
+    Repeat (1)
+    {
+        Control.DeleteThisClone();
+    }
+    Control.Wait(0.3);
+    Call Spawn(floor((3 + (scene / 3)))) of(19);
+    If (scene > 3)
+    {
+        Call Spawn((scene - 3)) of(19);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    aclone = 1;
+    Looks.SetSizeTo(200);
+    Looks.SetEffectTo(GHOST, 100);
+    enemyhealth = eh[type];
+    Forever
+    {
+        If Sensing.TouchingObject(01)player)
+        {
+            Sound.Play(Coin);
+            Potions += 1;
+            Control.DeleteThisClone();
+        }
+        If Sensing.TouchingObject(02)WALLS)
+        {
+            Motion.GoTo(_random_);
+        }
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Draw(string type) x(string x) dist(string dist) (warp=true)
+{
+    Repeat Until (Draw Dist[(DRAW INDEX - 1)] > dist)
+    {
+        DRAW INDEX += -1;
+    }
+    Repeat Until (Draw Dist[DRAW INDEX] < dist)
+    {
+        DRAW INDEX += 1;
+    }
+    List.InsertItem(Draw Type, DRAW INDEX, type);
+    List.InsertItem(Draw X, DRAW INDEX, x);
+    List.InsertItem(Draw Dist, DRAW INDEX, dist);
+}
+
+Define Move(string number or text) (warp=false)
+{
+    Motion.ChangeXBy((sin(Motion.Direction()) * number or text));
+    If (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(06)Entities))
+    {
+        Motion.ChangeXBy((0 - (sin(Motion.Direction()) * number or text)));
+    }
+    Motion.ChangeYBy((cos(Motion.Direction()) * number or text));
+    If (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(06)Entities))
+    {
+        Motion.ChangeYBy((0 - (cos(Motion.Direction()) * number or text)));
+    }
+}
+
+Define Rotate View(string x)(string y)(string action)(string n) (warp=false)
+{
+    vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
+    vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
+    If (action == 1)
+    {
+        If (vy > 0)
+        {
+            Call Draw(type) x((vx * (DV / vy))) dist(vy);
+        }
+    }
+    Else
+    {
+        If (action == 2)
+        {
+            enemyhealth += n;
+            List.Add(DMG Spawn, Motion.XPosition());
+            List.Add(DMG Spawn, Motion.YPosition());
+            List.Add(DMG Spawn, Operator.Round((n * 3)));
+            List.Add(DMG Spawn, 6);
+        }
+        Else
+        {
+            List.Add(DMG Spawn, Motion.XPosition());
+            List.Add(DMG Spawn, Motion.YPosition());
+            List.Add(DMG Spawn, n);
+            List.Add(DMG Spawn, 100);
+        }
+    }
+}
+
+Define Spawn(string c) of(string type) (warp=true)
+{
+    Looks.Show();
+    type = type;
+    Repeat (c)
+    {
+        Motion.GoTo(_random_);
+        Repeat Until (Not (((Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(06)Entities)) And (Sensing.DistanceTo(01)player) > 100))))
+        {
+            Motion.GoTo(_random_);
+        }
+        If (scene < 9)
+        {
+            Control.CreateCloneOf(_myself_);
+        }
+    }
+    Motion.GoToXY(x, y);
+    type = g;
+    Looks.Hide();
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Exp pts = 10000;
+
+Level = 14;
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume2.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Coin.wav

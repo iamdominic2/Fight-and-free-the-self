@@ -1,0 +1,77 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+count = 2
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Forever
+    {
+        If (List.Length(DMG Spawn) > 0)
+        {
+            Call Spawn;
+        }
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.Show();
+    Repeat (10)
+    {
+        Motion.ChangeYBy(5);
+        Looks.ChangeEffectBy(GHOST, 9);
+    }
+    Control.DeleteThisClone();
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Spawn (warp=true)
+{
+    Motion.GoToXY(0, -60);
+    If (DMG Spawn[4] == 180)
+    {
+        Motion.ChangeXBy(-33);
+    }
+    count = 0;
+    Repeat (Variable.Length(DMG Spawn[3]))
+    {
+        Looks.SetEffectTo(COLOR, DMG Spawn[4]);
+        count += 1;
+        Looks.SwitchCostumeTo(Operator.LetterOf(DMG Spawn[3], count));
+        Control.CreateCloneOf(_myself_);
+        Motion.ChangeXBy(15);
+    }
+    List.DeleteItem(DMG Spawn, 1);
+    List.DeleteItem(DMG Spawn, 1);
+    List.DeleteItem(DMG Spawn, 1);
+    List.DeleteItem(DMG Spawn, 1);
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+-.svg
+0.svg
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

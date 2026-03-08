@@ -1,0 +1,42 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(0, 0);
+    Forever
+    {
+        Looks.SwitchCostumeTo(scene);
+        Looks.SetEffectTo(GHOST, (G + 70));
+        Looks.SetEffectTo(COLOR, -77);
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(map)
+{
+    Looks.SetEffectTo(GHOST, 50);
+    Repeat (4)
+    {
+        Looks.SetEffectTo(GHOST, 50);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

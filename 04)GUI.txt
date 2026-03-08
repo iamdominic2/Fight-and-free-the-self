@@ -1,0 +1,87 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+count = 5
+leve = 0
+
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Gui)
+{
+    Motion.GoToXY(-230, -165);
+    Looks.Hide();
+    Call EXP DISPLAY;
+    Motion.GoToXY(-230, -140);
+    Looks.Hide();
+    Call LOC DISPLAY;
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define EXP DISPLAY (warp=true)
+{
+    Looks.SetEffectTo(BRIGHTNESS, 0);
+    count = 0;
+    Repeat (Variable.Length(EXP DISPLAY))
+    {
+        count += 1;
+        Looks.SwitchCostumeTo(Operator.LetterOf(EXP DISPLAY, count));
+        Pen.Stamp();
+        Motion.ChangeXBy((8.5 * ((Costume.GetNumberName(number) > 12) + (((Costume.GetNumberName(number) == 18) * 2) + 1))));
+    }
+    Pen.SetPenColorToColor(#730606);
+    Pen.SetPenSizeTo(7);
+    Motion.SetX(80);
+    Motion.ChangeYBy(1);
+    Pen.Down();
+    Motion.ChangeXBy((((Level * 12) + 52.5) / 2));
+    Pen.Clear();
+    Pen.SetPenColorToColor(#ff0f0f);
+    Pen.SetPenSizeTo(5);
+    Motion.SetX(80);
+    Pen.Down();
+    Motion.ChangeXBy((Health * 0.75));
+    Pen.Clear();
+}
+
+Define LOC DISPLAY (warp=true)
+{
+    Looks.SetEffectTo(BRIGHTNESS, 0);
+    count = 0;
+    Repeat (Variable.Length(Operator.Join(Operator.Join(Operator.Round(Sensing.Of(x position, 01)player)), ", "), Operator.Round(Sensing.Of(y position, 01)player)))))
+    {
+        count += 1;
+        Looks.SwitchCostumeTo(Operator.LetterOf(Operator.Join(Operator.Join(Operator.Round(Sensing.Of(x position, 01)player)), ", "), Operator.Round(Sensing.Of(y position, 01)player))), count));
+        Pen.Stamp();
+        Motion.ChangeXBy((10 * ((Costume.GetNumberName(number) > 12) + 1)));
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+ .svg
+,.svg
+-.svg
+0.svg
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+:.svg
+E.svg
+L.svg
+N.svg
+P.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

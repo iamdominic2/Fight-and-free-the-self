@@ -1,0 +1,46 @@
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Motion.GoToXY(-110, -35);
+    Looks.Show();
+    Looks.SetEffectTo(GHOST, 30);
+    Looks.SetEffectTo(BRIGHTNESS, -50);
+    Looks.SwitchCostumeTo(heal);
+    Looks.SetSizeTo(70);
+    Repeat (3)
+    {
+        Looks.NextCostume();
+        Control.CreateCloneOf(_myself_);
+        Motion.ChangeXBy(60);
+    }
+    Looks.Hide();
+}
+
+
+//----- Key pressed events --------------------------------------------------------------------------------------------
+
+WhenKeyPressed(any)
+{
+    Looks.Hide();
+}
+
+
+//----- Sprite clicked events -----------------------------------------------------------------------------------------
+
+WhenThisSpriteClicked()
+{
+    List.Add(mobileinputs, Costume.GetNumberName(name));
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+atk.svg
+heal.svg
+map.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav
