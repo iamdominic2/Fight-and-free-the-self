@@ -1,3 +1,5 @@
+//The thing that detects a collsion with wall FOR THE PURPOSES OF RENDERING AN IMAGE
+
 //----- Variables -----------------------------------------------------------------------------------------------------
 
 counter1 = 0
@@ -34,7 +36,7 @@ WhenGreenFlagClicked()
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(Raycast)
+WhenBroadcastReceived(Raycast) //Do the raycast function
 {
     Call Raycast;
 }
@@ -42,7 +44,7 @@ WhenBroadcastReceived(Raycast)
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define Draw(string type) x(string x) dist(string dist) (warp=true)
+Define Draw(string type) x(string x) dist(string dist) (warp=true) //Draw an entity, math for entities are calculated beforehand
 {
     Repeat Until (Draw Dist[(DRAW INDEX - 1)] > dist)
     {
@@ -57,7 +59,7 @@ Define Draw(string type) x(string x) dist(string dist) (warp=true)
     List.InsertItem(Draw Dist, DRAW INDEX, dist);
 }
 
-Define Raycast (warp=true)
+Define Raycast (warp=true) //Draw a line and check if wall is detected.
 {
     Looks.SwitchCostumeTo(costume2);
     Looks.SetSizeTo(0);
@@ -74,7 +76,7 @@ Define Raycast (warp=true)
     }
 }
 
-Define Single Ray (warp=true)
+Define Single Ray (warp=true) //One single ray is shot, this is executed many times each frame
 {
     Pen.Clear();
     Repeat Until (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(03)nextwarpzone))
