@@ -22,7 +22,7 @@ WhenGreenFlagClicked()
     RES = 4;
     Delta = 0;
     Time = 0;
-    Forever
+    Forever //Delta is related to change in time, a compromise for FPS
     {
         Delta = ((Sensing.Timer() - Time) * 30);
         If (Delta > 2)
