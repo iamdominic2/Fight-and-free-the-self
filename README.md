@@ -9,5 +9,4 @@ Basically, the camera works like this  (for entities) with TRIG (yay)
 vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
 vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
 
-For raycasting: Wall height is inversely proportional to distance traveled by the ray from FOV.
-Focal length is 480 pixels.
+For raycasting: Raycaster fires a ray each frame from many "slanted" angles relative to player position Wall height is inversely proportional to distance traveled by the ray from FOV, and renders the Anticlockwise stuff left, Clockwise stuff right (to the middle).
