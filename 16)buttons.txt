@@ -1,3 +1,5 @@
+//Buttons about healing and map.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
