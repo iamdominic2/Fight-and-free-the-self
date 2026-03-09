@@ -1,3 +1,5 @@
+//The SECOND joystick for mobile friendliness.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
