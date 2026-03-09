@@ -1,3 +1,5 @@
+//Basically, spawns potion updates the potion count when the player character touches a potion and deletes it from the map.
+
 //----- Variables -----------------------------------------------------------------------------------------------------
 
 aclone = 0
@@ -17,14 +19,14 @@ WhenGreenFlagClicked()
     Motion.GoToXY(6, -5);
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Spawn initial potions
 {
     aclone = 0;
     Control.Wait(0.2);
     Call Spawn(2) of(19);
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Start game with 1 potion for easier access to beginners
 {
     Potions = 1;
 }
@@ -32,7 +34,7 @@ WhenGreenFlagClicked()
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(Ent Tick)
+WhenBroadcastReceived(Ent Tick) //Again, rotate view does not actaully rotate which way the ITEMS are seeing. It's just to assist the rendering.
 {
     If (aclone == 1)
     {
@@ -45,7 +47,7 @@ WhenBroadcastReceived(Ent Tick)
     }
 }
 
-WhenBroadcastReceived(Ent Tick)
+WhenBroadcastReceived(Ent Tick) //Duplicate of above for contingency
 {
     If (aclone == 1)
     {
@@ -58,7 +60,7 @@ WhenBroadcastReceived(Ent Tick)
     }
 }
 
-WhenBroadcastReceived(map)
+WhenBroadcastReceived(map) //Show potions on the map when map toggle is on
 {
     Looks.SetEffectTo(GHOST, 50);
     Repeat (3)
@@ -68,7 +70,7 @@ WhenBroadcastReceived(map)
     Looks.SetEffectTo(GHOST, 100);
 }
 
-WhenBroadcastReceived(next)
+WhenBroadcastReceived(next) //Generate new potions and erase old ones when player translocates to new area.
 {
     Stop(other scripts in sprite);
     Repeat (1)
@@ -86,7 +88,7 @@ WhenBroadcastReceived(next)
 
 //----- Start as clone ------------------------------------------------------------------------------------------------
 
-Control.WhenIStartAsClone()
+Control.WhenIStartAsClone() //Make a clone at a random location (Health is a dummy left over from duplication of monster).
 {
     aclone = 1;
     Looks.SetSizeTo(200);
@@ -94,13 +96,13 @@ Control.WhenIStartAsClone()
     enemyhealth = eh[type];
     Forever
     {
-        If Sensing.TouchingObject(01)player)
+        If Sensing.TouchingObject(01)player) //Collect the potion.
         {
             Sound.Play(Coin);
             Potions += 1;
             Control.DeleteThisClone();
         }
-        If Sensing.TouchingObject(02)WALLS)
+        If Sensing.TouchingObject(02)WALLS) //Potions stuck in stone is no fun.
         {
             Motion.GoTo(_random_);
         }
@@ -110,7 +112,7 @@ Control.WhenIStartAsClone()
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define Draw(string type) x(string x) dist(string dist) (warp=true)
+Define Draw(string type) x(string x) dist(string dist) (warp=true) //Draw it on map
 {
     Repeat Until (Draw Dist[(DRAW INDEX - 1)] > dist)
     {
@@ -125,7 +127,7 @@ Define Draw(string type) x(string x) dist(string dist) (warp=true)
     List.InsertItem(Draw Dist, DRAW INDEX, dist);
 }
 
-Define Move(string number or text) (warp=false)
+Define Move(string number or text) (warp=false) //Translocation, unused in here specifically
 {
     Motion.ChangeXBy((sin(Motion.Direction()) * number or text));
     If (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(06)Entities))
@@ -139,7 +141,7 @@ Define Move(string number or text) (warp=false)
     }
 }
 
-Define Rotate View(string x)(string y)(string action)(string n) (warp=false)
+Define Rotate View(string x)(string y)(string action)(string n) (warp=false) //Help the pen
 {
     vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
     vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
@@ -170,7 +172,7 @@ Define Rotate View(string x)(string y)(string action)(string n) (warp=false)
     }
 }
 
-Define Spawn(string c) of(string type) (warp=true)
+Define Spawn(string c) of(string type) (warp=true) //Spawn an item
 {
     Looks.Show();
     type = type;
