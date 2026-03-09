@@ -48,7 +48,7 @@ Define EXP DISPLAY (warp=true) //Displays experience, and contrary to its name i
     Pen.Clear();
 }
 
-Define LOC DISPLAY (warp=true) //Displays location
+Define LOC DISPLAY (warp=true) //Displays location co ordinates of the player for easier navigation for "nerds"
 {
     Looks.SetEffectTo(BRIGHTNESS, 0);
     count = 0;
