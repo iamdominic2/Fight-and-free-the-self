@@ -1,6 +1,8 @@
+//The protagonist or player character who experiences the areas in first person.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //The core loop: Casting rays, having entities move, painting the output as the raycast is done, and Drawing the User Interface.
 {
     Motion.GoToXY(-29, 0);
     Motion.PointInDirection(80);
@@ -16,7 +18,7 @@ WhenGreenFlagClicked()
     }
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Related to "mini map" transparency
 {
     Forever
     {
@@ -24,7 +26,7 @@ WhenGreenFlagClicked()
     }
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //This is stronger than mini-map transparency so it actaully overwrites it.
 {
     Forever
     {
@@ -68,20 +70,20 @@ WhenGreenFlagClicked()
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define Int Raycaster (warp=false)
+Define Int Raycaster (warp=false) //Some math
 {
     CAM DIR = Motion.Direction();
-    DV = (240 / tan((FOV / 2)));
+    DV = (240 / tan((FOV / 2))); //Calculate Focal length for 480 pixels
     List.DeleteAll(Draw Dist);
     List.DeleteAll(Draw X);
     List.DeleteAll(Draw Type);
-    List.Add(Draw Dist, 999999999);
+    List.Add(Draw Dist, 999999999); //Such that priority for drawing a wall is the highest and thus never overwritten
     List.Add(Draw Type, "");
     List.Add(Draw X, "");
     DRAW INDEX = 2;
 }
 
-Define Move(string number or text) (warp=false)
+Define Move(string number or text) (warp=false) //Do a movement but revert it if a collision with walls occurs
 {
     Motion.ChangeXBy((sin(Motion.Direction()) * number or text));
     If Sensing.TouchingObject(02)WALLS)
@@ -95,12 +97,12 @@ Define Move(string number or text) (warp=false)
     }
 }
 
-Define Playertick (warp=false)
+Define Playertick (warp=false) //The player's movement script.
 {
     Looks.SetSizeTo(150);
     Looks.SwitchCostumeTo(costume1);
     Motion.SetRotationStyle(don't rotate);
-    If (Sensing.KeyPressed(left arrow) Or List.ContainsItem(mobileinputs, "left"))
+    If (Sensing.KeyPressed(left arrow) Or List.ContainsItem(mobileinputs, "left")) //Turning direction
     {
         Motion.TurnLeft(4);
         List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "left"));
@@ -110,7 +112,7 @@ Define Playertick (warp=false)
         Motion.TurnRight(4);
         List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "right"));
     }
-    If (Sensing.KeyPressed(a) Or List.ContainsItem(mobileinputs, "sleft"))
+    If (Sensing.KeyPressed(a) Or List.ContainsItem(mobileinputs, "sleft")) //Sidestep
     {
         Motion.TurnLeft(90);
         Call Move((0.8 * Delta));
@@ -134,7 +136,7 @@ Define Playertick (warp=false)
         Call Move((-0.75 * Delta));
         List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "down"));
     }
-    If Sensing.TouchingObject(03)nextwarpzone)
+    If Sensing.TouchingObject(03)nextwarpzone) //Go to the next area and perform the rendering while loading and resume this AND movement in the next area
     {
         Looks.Hide();
         Sound.Play(Teleport2);
@@ -160,7 +162,7 @@ Define Playertick (warp=false)
     Motion.SetRotationStyle(all around);
 }
 
-Define Win (warp=true)
+Define Win (warp=true) //A win is fine
 {
     Repeat Until Sensing.TouchingObject(03)nextwarpzone)
     {
