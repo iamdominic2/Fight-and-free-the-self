@@ -1,4 +1,4 @@
-//The SECOND joystick for mobile friendliness.
+//The SECOND joystick for mobile friendliness. Sidestepping.
 
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
