@@ -22,7 +22,7 @@ WhenBroadcastReceived(Gui) //Continuous display of experience and location
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define EXP DISPLAY (warp=true) //Displays experience
+Define EXP DISPLAY (warp=true) //Displays experience, and contrary to its name it actaully displays the rest of the HUD that I added later.
 {
     Looks.SetEffectTo(BRIGHTNESS, 0);
     count = 0;
