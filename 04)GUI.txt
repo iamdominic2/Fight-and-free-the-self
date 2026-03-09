@@ -1,3 +1,5 @@
+//User interface
+
 //----- Variables -----------------------------------------------------------------------------------------------------
 
 count = 5
@@ -7,7 +9,7 @@ leve = 0
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(Gui)
+WhenBroadcastReceived(Gui) //Continuous display of experience and location
 {
     Motion.GoToXY(-230, -165);
     Looks.Hide();
@@ -20,7 +22,7 @@ WhenBroadcastReceived(Gui)
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define EXP DISPLAY (warp=true)
+Define EXP DISPLAY (warp=true) //Displays experience
 {
     Looks.SetEffectTo(BRIGHTNESS, 0);
     count = 0;
@@ -46,7 +48,7 @@ Define EXP DISPLAY (warp=true)
     Pen.Clear();
 }
 
-Define LOC DISPLAY (warp=true)
+Define LOC DISPLAY (warp=true) //Displays location
 {
     Looks.SetEffectTo(BRIGHTNESS, 0);
     count = 0;
