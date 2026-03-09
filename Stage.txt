@@ -1,3 +1,5 @@
+//Again, the barrage of variables.
+
 //----- Variables -----------------------------------------------------------------------------------------------------
 
 Attacking = 0
@@ -484,7 +486,7 @@ Weapon Strength = {
 
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Sets the HUD.
 {
     Looks.SwitchBackdropTo(backdrop1);
     Looks.SetEffectTo(COLOR, 100);
@@ -523,7 +525,7 @@ WhenGreenFlagClicked()
     }
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Healing potion usage
 {
     Forever
     {
@@ -540,7 +542,7 @@ WhenGreenFlagClicked()
     }
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //This controls unlocked weapons
 {
     Forever
     {
@@ -551,7 +553,7 @@ WhenGreenFlagClicked()
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(EnemyDefeated)
+WhenBroadcastReceived(EnemyDefeated) //Level up script
 {
     Repeat (20)
     {
@@ -567,8 +569,8 @@ WhenBroadcastReceived(EnemyDefeated)
         Control.Wait(0);
     }
 }
-
-WhenBroadcastReceived(next)
+ 
+WhenBroadcastReceived(next) //Change color of empty space to better reflect environment
 {
     If (scene == 2)
     {
@@ -607,7 +609,7 @@ WhenBroadcastReceived(next)
     }
 }
 
-WhenBroadcastReceived(next)
+WhenBroadcastReceived(next) //Recovery
 {
     Call Full Rec;
     Used Potions += -1;
@@ -616,7 +618,7 @@ WhenBroadcastReceived(next)
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define Full Rec (warp=true)
+Define Full Rec (warp=true) //Fully recover HP
 {
     Health = ((Level * 8) + 35);
     Used Potions += 1;
