@@ -1,3 +1,5 @@
+//Monsters' locations themselves, also give information to renderer
+
 //----- Variables -----------------------------------------------------------------------------------------------------
 
 aclone = 0
@@ -10,21 +12,21 @@ vy = 0
 
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Initialize
 {
     Motion.SetRotationStyle(don't rotate);
     Looks.SetSizeTo(150);
     Motion.GoToXY(6, -5);
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Remove damage numbers left over from previous play session
 {
     G = 100;
     aclone = 0;
     List.DeleteAll(DMG Spawn);
 }
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Spawn monsters for the first area
 {
     Control.Wait(0.2);
     Call Spawn(5) of(1);
@@ -42,7 +44,7 @@ WhenGreenFlagClicked()
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(Ent Tick)
+WhenBroadcastReceived(Ent Tick) //Tell entities to move a small distance (each frame.)
 {
     If (aclone == 1)
     {
@@ -55,7 +57,7 @@ WhenBroadcastReceived(Ent Tick)
     }
 }
 
-WhenBroadcastReceived(map)
+WhenBroadcastReceived(map) //Shows monsters on map
 {
     Looks.SetEffectTo(GHOST, 50);
     Repeat (2)
