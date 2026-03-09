@@ -9,7 +9,7 @@ for entities some math is used:
 vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
 vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
 
-
+By the way, the title is a pun: Fight-and-3D-self
 
 Online Playable Link = https://iamdominic2.itch.io/fafts
 
