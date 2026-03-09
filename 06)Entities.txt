@@ -67,7 +67,7 @@ WhenBroadcastReceived(map) //Shows monsters on map
     Looks.SetEffectTo(GHOST, 100);
 }
 
-WhenBroadcastReceived(next)
+WhenBroadcastReceived(next) //Next scene
 {
     Stop(other scripts in sprite);
     Repeat (1)
@@ -75,7 +75,7 @@ WhenBroadcastReceived(next)
         Control.DeleteThisClone();
     }
     Control.Wait(0.3);
-    If (scene < 9)
+    If (scene < 9) //Render monsters
     {
         Call Spawn(((scene + 4) * 1.5)) of(((scene * 2) + -1));
         Call Spawn(((scene + 2) * 2)) of((scene * 2));
@@ -87,7 +87,7 @@ WhenBroadcastReceived(next)
             Control.Wait(4);
         }
     }
-    Else
+    Else //Final 2 monsters to beat the game
     {
         Call Spawn(1) of(17);
         Call Spawn(1) of(18);
@@ -97,7 +97,7 @@ WhenBroadcastReceived(next)
 
 //----- Start as clone ------------------------------------------------------------------------------------------------
 
-Control.WhenIStartAsClone()
+Control.WhenIStartAsClone() //For each monster
 {
     aclone = 1;
     Looks.SetSizeTo(200);
@@ -107,13 +107,13 @@ Control.WhenIStartAsClone()
     {
         Motion.PointTowards(01)player);
         Call Move(((Delta + (type / 8)) / 3));
-        If (((type == 9) Or (type == 5)) Or (scene == 6))
+        If (((type == 9) Or (type == 5)) Or (scene == 6)) //Move a distance to the player
         {
             Call Move(((Delta + (type / 8)) / 9));
         }
         If Sensing.TouchingObject(01)player)
         {
-            Sound.Play(Hurt2);
+            Sound.Play(Hurt2); //Deal damage to player
             If (1 < 2)
             {
                 If (scene > 2)
@@ -130,7 +130,7 @@ Control.WhenIStartAsClone()
                 }
             }
         }
-        Call Attacked Check;
+        Call Attacked Check; //Check for whether player weapon collision is true or not
         Call re;
     }
 }
