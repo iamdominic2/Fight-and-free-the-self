@@ -1,3 +1,5 @@
+//The invisible entity, takes the shape of a weapon.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
@@ -7,17 +9,17 @@ WhenGreenFlagClicked()
         Motion.GoTo(01)player);
         Motion.PointInDirection(CAM DIR);
         Attacking = 0;
-        Looks.SwitchCostumeTo(Weapon No);
+        Looks.SwitchCostumeTo(Weapon No); //This is the trick for weapon swapping range.
         Looks.SetEffectTo(GHOST, 100);
-        If ((Sensing.KeyPressed(space) Or List.ContainsItem(mobileinputs, "atk")) And (SpaceDown == 0))
+        If ((Sensing.KeyPressed(space) Or List.ContainsItem(mobileinputs, "atk")) And (SpaceDown == 0)) //Attack button
         {
             SpaceDown = 1;
-            If ((Not (Sensing.TouchingObject(02)WALLS))) Or ((Costume.GetNumberName(number) == 3) Or (Costume.GetNumberName(number) == 5)))
+            If ((Not (Sensing.TouchingObject(02)WALLS))) Or ((Costume.GetNumberName(number) == 3) Or (Costume.GetNumberName(number) == 5))) //Attack occurs and wall is not directed facing for short-range weapons
             {
                 Attacking = 1;
             }
             Sound.SetVolumeTo(55);
-            If Sensing.TouchingObject(06)Entities)
+            If Sensing.TouchingObject(06)Entities) //Collision bigger noise
             {
                 Sound.SetVolumeTo(100);
             }
@@ -27,7 +29,7 @@ WhenGreenFlagClicked()
             List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
             List.DeleteItem(mobileinputs, List.IndexOf(mobileinputs, "atk"));
             Looks.Hide();
-            Repeat (Weapon Cooldown[Weapon No])
+            Repeat (Weapon Cooldown[Weapon No]) //Wait for the weapon to cool down to prevent excessive spamming
 ;
             Attacking = 0;
             Looks.Show();
@@ -43,7 +45,7 @@ WhenGreenFlagClicked()
     SpaceDown = 1;
     Forever
     {
-        If (Not (Sensing.KeyPressed(space)))
+        If (Not (Sensing.KeyPressed(space))) //Detects whether SPACE is just held, prevent attacks if it is done without release.
         {
             SpaceDown = 0;
         }
