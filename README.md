@@ -8,3 +8,6 @@ Downloaded ZIP (HTML version had a technical error) = https://drive.google.com/f
 Basically, the camera works like this  (for entities) with TRIG (yay)
 vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
 vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
+
+For raycasting: Wall height is inversely proportional to distance traveled by the ray from FOV.
+Focal length is 480 pixels.
