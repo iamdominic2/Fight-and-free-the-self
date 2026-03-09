@@ -1,3 +1,5 @@
+//The warp zone for next area, nothing special code-wise other than the same transparency code MINIMAP used for other stuff
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
