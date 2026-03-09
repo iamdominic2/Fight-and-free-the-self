@@ -124,7 +124,7 @@ Control.WhenIStartAsClone() //For each monster
                 {
                     Call Hurt(((((((-3.3 * scene) + Level) - 1.5) / 1.25) + (-2 * ((type % 2) == 0))) * 0.8));
                 }
-                Repeat (10)
+                Repeat (10) //This is a minor pause for relief when player is damage: Pause movement for 10 frames
                 {
                     Call Attacked Check;
                 }
@@ -138,18 +138,18 @@ Control.WhenIStartAsClone() //For each monster
 
 //----- Custom blocks -------------------------------------------------------------------------------------------------
 
-Define Attacked Check (warp=false)
+Define Attacked Check (warp=false) //Check whether monster was attacked
 {
-    If (Sensing.TouchingObject(08)attack) And (Attacking == 1))
+    If (Sensing.TouchingObject(08)attack) And (Attacking == 1)) //Detect whether player's weapon touches monster and player is currently attacking or not.
     {
         Sound.Play(Enemy Hurt);
-        Call Rotate View(Motion.XPosition())(Motion.YPosition())(2)(((Operator.Random(-1.3 , -1) * ((Level / 1.8) + 1)) * Weapon Strength[Weapon No]));
-        If (enemyhealth < 1)
+        Call Rotate View(Motion.XPosition())(Motion.YPosition())(2)(((Operator.Random(-1.3 , -1) * ((Level / 1.8) + 1)) * Weapon Strength[Weapon No])); //Draws a number for damage, does not actaully rotate view from the player's perspective.
+        If (enemyhealth < 1) //Defeat enemy and give EXP
         {
             Extra = (type % 2);
-            If (((type == 15) Or (type == 9)) Or (scene == 9))
+            If (((type == 15) Or (type == 9)) Or (scene == 9)) //
             {
-                Extra += -1.5;
+                Extra += -1.5; //Experience bonus
             }
             Exp pts += floor((e ^(scene) * ((0.4 - (Extra * 0.4)) + 1)));
             Call Rotate View(vx)(vy)(100)(floor((e ^(scene) * ((0.4 - (Extra * 0.4)) + 1))));
@@ -162,7 +162,7 @@ Define Attacked Check (warp=false)
     }
 }
 
-Define Draw(string type) x(string x) dist(string dist) (warp=true)
+Define Draw(string type) x(string x) dist(string dist) (warp=true) //Draw numbers or letters for the pop-up-text to process
 {
     Repeat Until (Draw Dist[(DRAW INDEX - 1)] > dist)
     {
@@ -177,7 +177,7 @@ Define Draw(string type) x(string x) dist(string dist) (warp=true)
     List.InsertItem(Draw Dist, DRAW INDEX, dist);
 }
 
-Define Hurt(string hp) (warp=false)
+Define Hurt(string hp) (warp=false) //Take damage
 {
     If (hp > -1)
     {
@@ -191,7 +191,7 @@ Define Hurt(string hp) (warp=false)
     }
 }
 
-Define Move(string number or text) (warp=false)
+Define Move(string number or text) (warp=false) //Do a 1-frame movement, similar to player's code.
 {
     Motion.ChangeXBy((sin(Motion.Direction()) * number or text));
     If (Sensing.TouchingObject(02)WALLS) Or Sensing.TouchingObject(06)Entities))
@@ -205,7 +205,7 @@ Define Move(string number or text) (warp=false)
     }
 }
 
-Define re (warp=true)
+Define re (warp=true) //In the case of spawning in stone, teleport randomly
 {
     Repeat Until (Not (Sensing.TouchingObject(02)WALLS)))
     {
@@ -217,7 +217,7 @@ Define re (warp=true)
     }
 }
 
-Define Rotate View(string x)(string y)(string action)(string n) (warp=false)
+Define Rotate View(string x)(string y)(string action)(string n) (warp=false) //Does not actually rotate view, only outputs a number.
 {
     vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
     vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
@@ -248,7 +248,7 @@ Define Rotate View(string x)(string y)(string action)(string n) (warp=false)
     }
 }
 
-Define Spawn(string c) of(string type) (warp=true)
+Define Spawn(string c) of(string type) (warp=true) //Spawns a monster into the area, number and type.
 {
     Looks.Show();
     type = type;
