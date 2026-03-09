@@ -1,9 +1,9 @@
 # Fight-and-free-the-self
 Three dimensional raycaster of maze-wandering and real-time monster combat. You go through areas, collecting potions, battling monsters, and the main goal is to go to the exit. (And defeat the final bosses in the final area.) Keep health above 0.
 
-Raycasting is basically a technique where rays are fired at several angles relative to the player's perspective and the distance is recorded to generate an image.
+Definition: Raycasting is the methodological basis for 3D CAD/CAM solid modeling and image rendering. It is essentially the same as ray tracing for computer graphics where virtual light rays are "cast" or "traced" on their path from the focal point of a camera through each pixel in the camera sensor to determine what is visible along the ray in the 3D scene.
 
-For raycasting: Raycaster fires a ray each frame from many "slanted" angles relative to player position Wall height is inversely proportional to distance traveled by the ray from FOV, and renders the Anticlockwise stuff left, Clockwise stuff right (relative to the middle).
+Raycaster fires a ray each frame from many "slanted" angles relative to player position Wall height is inversely proportional to distance traveled by the ray from FOV, and renders the Anticlockwise stuff left, Clockwise stuff right (relative to the middle).
 
 for entities some math is used:
 vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
