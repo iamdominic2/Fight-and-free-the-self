@@ -1,6 +1,8 @@
+//This is the map walls displayed IN THE MAP VISIBILE TO THE PLAYER. The margins are basically croped out for easier visiblity of UI or such (but it won't work for actual walls because items and monsters can spawn in the margins and get stuck)
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
-WhenGreenFlagClicked()
+WhenGreenFlagClicked() //Toggle minimap on and off script 1, and this one also handles costume switching.
 {
     Motion.GoToXY(0, 0);
     Forever
@@ -14,7 +16,7 @@ WhenGreenFlagClicked()
 
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(map)
+WhenBroadcastReceived(map) //Toggle minimap on and off script 2, and this one handles the delay.
 {
     Looks.SetEffectTo(GHOST, 50);
     Repeat (4)
