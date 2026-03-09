@@ -1,3 +1,5 @@
+/This is the information display (involves attack power, and attack speed, and range) given for weapons when you hover over their icon in your inventory.
+
 //----- Green flag events ---------------------------------------------------------------------------------------------
 
 WhenGreenFlagClicked()
