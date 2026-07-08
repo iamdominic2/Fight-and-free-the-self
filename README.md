@@ -11,12 +11,4 @@ vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
 
 By the way, the title is a pun: Fight-and-3D-self
 
-Online Playable Link = https://iamdominic2.itch.io/fafts
-
-Downloaded ZIP (HTML version had a technical error) = https://drive.google.com/file/d/1Behw3lnvMsX6lIOfQdMuG1wsRxYLTFAj/view?usp=sharing
-
-Yet again, note that I only documented post-implementation to ensure full accuracy with the final program as I might forget to change things here along the way.
-
-Project ID = 723740037
-
-Block Count = 1518 
+Online Playable Link = https://iamdominic2.github.io/Fight-and-free-the-self/
