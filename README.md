@@ -1,6 +1,8 @@
 # Fight-and-free-the-self
 
-Link = https://iamdominic2.github.io/Fight-and-free-the-self/
+The title is a pun: Fight-and-3D-self!
+
+**Link = https://iamdominic2.github.io/Fight-and-free-the-self/**
 
 Three-dimensional raycaster of maze-wandering and real-time monster combat. You go through areas, collecting potions, battling monsters, and the main goal is to go to the exit. (And defeat the final bosses in the final area.) Keep health above 0.
 
@@ -11,7 +13,5 @@ Raycaster fires a ray each frame from many "slanted" angles relative to the play
 For entities, some math is used:
 vx = ((x * cos(CAM DIR)) - (y * sin(CAM DIR)));
 vy = ((x * sin(CAM DIR)) + (y * cos(CAM DIR)));
-
-By the way, the title is a pun: Fight-and-3D-self.
 
 It was originally a 2022 Scratch project, but I updated the minimap and showed the enemies, and then compiled it to HTML because Scratch was laggy, which was annoying. It's great now!
