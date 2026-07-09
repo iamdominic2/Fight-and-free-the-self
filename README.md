@@ -2,7 +2,7 @@
 
 The title is a pun: Fight-and-3D-self!
 
-**Link = https://iamdominic2.github.io/Fight-and-free-the-self/**
+**Link (HTML) = https://iamdominic2.github.io/Fight-and-free-the-self/**
 
 Three-dimensional raycaster of maze-wandering and real-time monster combat. You go through areas, collecting potions, battling monsters, and the main goal is to go to the exit. (And defeat the final bosses in the final area.) Keep health above 0.
 
